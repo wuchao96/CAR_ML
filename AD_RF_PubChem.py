@@ -53,8 +53,8 @@ wtFunc2b = expWt
 kw2b = {'a':5}
 
 #import data
-df_train = pd.read_csv('/home/dell/wuchao/ML/1785_IARC/1697FS/AD/1697_trainset.csv',index_col = 'CARID')
-df_ext = pd.read_csv('/home/dell/wuchao/ML/1785_IARC/1697FS/AD/1697_testset.csv',index_col = 'CARID')
+df_train = pd.read_csv('/home/dell/wuchao/ML/1697FS/AD/1697_trainset.csv',index_col = 'CARID')
+df_ext = pd.read_csv('/home/dell/wuchao/ML/1697FS/AD/1697_testset.csv',index_col = 'CARID')
 print(df_ext.columns)
 
 
@@ -81,16 +81,16 @@ save_time = str(time.ctime()).replace(':','-').replace(' ','_')
 'rigid':[ 0.01, 0.1, 0.5, 1,1.3, 1.5, 1.8, 2,2.3, 2.5, 2.8, 3,3.3, 3.5, 3.8, 4, 4.5, 5,5.3, 5.5, 5.8, 6, 6.3, 6.5, 6.8, 7, 7.5, 8, 9, 10, 15, 20], 
 'exp':[0.0001,0.001, 0.01, 0.1, 0.5, 1,1.3, 1.5, 1.8, 2,2.3, 2.5, 2.8, 3,3.3, 3.5, 3.8, 4, 4.3, 4.5, 4.8, 5, 5.3, 5.5, 5.8, 6, 6.3, 6.5, 6.8, 7, 7.5, 8, 9, 10, 15, 20]}
 
-os.chdir('/home/dell/wuchao/ML/1785_IARC/1697FS')
+os.chdir('/home/dell/wuchao/ML/1697FS')
 df1782 = pd.read_csv('PubChem_1697_FS.csv')
-df_test = pd.read_csv('/home/dell/wuchao/ML/1785_IARC/1697FS/AD/1697_testset.csv')
+df_test = pd.read_csv('/home/dell/wuchao/ML/1697FS/AD/1697_testset.csv')
 #X_test = df1782.loc[df1782['CARID'].isin(df_test.CARID)]
 X_test = pd.merge(df_test, df1782, on='CARID', how='inner')
-X_test.to_csv('/home/dell/wuchao/ML/1785_IARC/1697FS/AD/1697_XTEST_F.csv', index=False)
+X_test.to_csv('/home/dell/wuchao/ML/1697FS/AD/1697_XTEST_F.csv', index=False)
 #print(X_test)
 X_te = X_test.iloc[:,14:-1]
 y_tr =  df_test['Carcinogenicity']
-with open("/home/dell/wuchao/ML/1785_IARC/1697FS/model/RF_PubChem_1697_FS.pkl", 'rb') as mymodel:
+with open("/home/dell/wuchao/ML/1697FS/model/RF_PubChem_1697_FS.pkl", 'rb') as mymodel:
     best_model=pickle.load(mymodel)
     y_pred = best_model.predict(X_te)
     #print(y_pred)
@@ -117,10 +117,10 @@ with open("/home/dell/wuchao/ML/1785_IARC/1697FS/model/RF_PubChem_1697_FS.pkl", 
     # 合并 X_te, y_pred 和 y_test_proba
     df_combined = pd.concat([df_y_pred, df_y_proba], axis=1)
     df_fplot = pd.concat([X_test, df_combined], axis=1)
-    df_fplot.to_csv('/home/dell/wuchao/ML/1785_IARC/1697FS/AD/1697_XTEST_Y.csv', index=False)
+    df_fplot.to_csv('/home/dell/wuchao/ML/1697FS/AD/1697_XTEST_Y.csv', index=False)
 
 
-df_plot = pd.read_csv('/home/dell/wuchao/ML/1785_IARC/1697FS/AD/1697_XTEST_Y.csv',index_col = 'CARID')
+df_plot = pd.read_csv('/home/dell/wuchao/ML/1697FS/AD/1697_XTEST_Y.csv',index_col = 'CARID')
 y_tr = df_plot['Carcinogenicity_y']
 y_prob = df_plot['y_proba']
 y_pred = (y_prob > 0.5).astype(int)
@@ -156,10 +156,10 @@ for code in ['rigid','exp']:
             dfMCC.loc[LdUB,densLB] = metrics.matthews_corrcoef(y_tr[adi],y_pred[adi])
 
     #print the performance of classifier with within ADSAL on the external validation set
-    dfn.to_csv('/home/dell/wuchao/ML/1785_IARC/1697FS/AD/1697ADResults/56_85_Classifier_{:s}_AD_n_{}.csv'.format(code,save_time))
-    dfAUC.to_csv('/home/dell/wuchao/ML/1785_IARC/1697FS/AD/1697ADResults/56_85_Classifier{:s}_AD_AUC_{}.csv'.format(code,save_time))
-    dfBA.to_csv('/home/dell/wuchao/ML/1785_IARC/1697FS/AD/1697ADResults/56_85_Classifier{:s}_AD_BA_{}.csv'.format(code,save_time))
-    dfRA.to_csv('/home/dell/wuchao/ML/1785_IARC/1697FS/AD/1697ADResults/56_85_Classifier{:s}_AD_RA_{}.csv'.format(code,save_time))
+    dfn.to_csv('/home/dell/wuchao/ML/1697FS/AD/1697ADResults/56_85_Classifier_{:s}_AD_n_{}.csv'.format(code,save_time))
+    dfAUC.to_csv('/home/dell/wuchao/ML/1697FS/AD/1697ADResults/56_85_Classifier{:s}_AD_AUC_{}.csv'.format(code,save_time))
+    dfBA.to_csv('/home/dell/wuchao/ML/1697FS/AD/1697ADResults/56_85_Classifier{:s}_AD_BA_{}.csv'.format(code,save_time))
+    dfRA.to_csv('/home/dell/wuchao/ML/1697FS/AD/1697ADResults/56_85_Classifier{:s}_AD_RA_{}.csv'.format(code,save_time))
     #dfSP.to_csv('Classifier{:s}_AD_SP.csv'.format(code))
-    dfSE.to_csv('/home/dell/wuchao/ML/1785_IARC/1697FS/AD/1697ADResults/56_85_Classifier{:s}_AD_SE_{}.csv'.format(code,save_time))
-    dfMCC.to_csv('/home/dell/wuchao/ML/1785_IARC/1697FS/AD/1697ADResults/56_85_Classifier{:s}_AD_MCC_{}.csv'.format(code,save_time))
+    dfSE.to_csv('/home/dell/wuchao/ML/1697FS/AD/1697ADResults/56_85_Classifier{:s}_AD_SE_{}.csv'.format(code,save_time))
+    dfMCC.to_csv('/home/dell/wuchao/ML/1697FS/AD/1697ADResults/56_85_Classifier{:s}_AD_MCC_{}.csv'.format(code,save_time))
