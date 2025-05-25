@@ -5,6 +5,7 @@ CAR_ML is a machine learning framework (based on random forest algorithm with th
 
 Run ML_model_RF using a case:
 python ML_MODEL_RF.py
+Before executing the code, ensure that the file 'PubChem_1697_FS.csv' is located in the directory specified by os.chdir()
 
 Run AD_RF_PubChem using a case:
 python AD_RF_PubChem.py
