@@ -25,7 +25,7 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import StratifiedShuffleSplit
 import pickle
 
-os.chdir('/home/dell/wuchao/ML/1785_IARC/1697FS/1697FS_12')
+os.chdir('/home/dell/wuchao/ML/1697FS/1697FS_12')
 file_list = [file for file in os.listdir() if file.endswith('.csv')]
 
 if not os.path.exists('model'):
@@ -91,9 +91,9 @@ for file in file_list:
     score = evaluate_model(clf,X_val, y_val)
     score
     results = pd.DataFrame(score.cv_results_)
-    #results.to_csv('F:/W/W 20221114/W/6 diverse/input data/2043 1784/1782 results/gridCV_+SVM PubChem fingerprints FS 1782.csv')
+    
     results.to_csv('1697results/' + file.split('.')[0] + '_10_RF.csv')
-    #df_train = pd.read_csv('F:/W/W 20221114/W/6 diverse/input data/2043 1784/1782 results/gridCV_+SVM PubChem fingerprints FS 1782.csv')
+    
     df_rank_roc = results.loc[(results['rank_test_roc_auc'] == 1)]
 
     df_best=df_rank_roc[['params','mean_test_accuracy', 'std_test_accuracy', 
@@ -112,7 +112,7 @@ for file in file_list:
     df_best.insert(7,str('mean_test_specificity'),mean_test_SP)
     df_best.insert(8,str('std_test_specificity'),std_test_SP )
 
-    #df_best.to_csv('F:/W/W 20221114/W/6 diverse/input data/2043 1784/1782 results/Train best results SVM PubChem fingerprints FS 1782.csv')
+    
     df_best.to_csv('1697results/' + file.split('.')[0] + '_10best_RF.csv')        
     y_pred = score.predict(X_te)
 
@@ -169,7 +169,6 @@ for file in file_list:
 
     df_test
 
-    #df_test.to_csv('F:/W/W 20221114/W/6 diverse/input data/2043 1784/1782 results/TEST SVM PubChem fingerprints FS 1782.csv')
     df_test.to_csv('1697results/' + file.split('.')[0] + '_test_RF.csv')
 
 
