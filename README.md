@@ -9,5 +9,6 @@ Before executing the code, ensure that the file 'PubChem_1697_FS.csv' is located
 
 Run AD_RF_PubChem using a case:
 python AD_RF_PubChem.py
+Before executing this code, ensure you have already trained and saved the model, then load it here.
 
 Note: Before running the code, make sure to modify the input data paths in the script to match the location of your own data files. 
