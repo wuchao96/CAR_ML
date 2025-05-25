@@ -4,7 +4,7 @@ CAR_ML is a machine learning framework (based on random forest algorithm with th
 #Usage
 
 Run ML_model_RF using a case:
-python ML_model_RF.py
+python ML_MODEL_RF.py
 
 Run AD_RF_PubChem using a case:
 python AD_RF_PubChem.py
